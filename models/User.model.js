@@ -8,6 +8,9 @@ const UserSchema = new Schema({
         unique:true,
     },
     password: String,
+    direction:String, 
+    cellphone:String,
+    role:String,
     stores:[{
         type: Schema.Types.ObjectId,
         ref: "Store"

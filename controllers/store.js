@@ -6,7 +6,6 @@ storeController.saveStore = async (req, res) => {
     
     try {
         const {name, direction, user} = req.body
-        console.log({name, direction, user})
         
         const newStore = new Store({
             name: name,
@@ -29,9 +28,13 @@ storeController.saveStore = async (req, res) => {
 }
 
 storeController.getStores = async (req, res) => {
-    const stores = await Store.find().populate('userId')
+    try {
+        const stores = await Store.find().populate('userId')
 
-    res.send(stores)
+        res.send(stores)
+    } catch (error) {
+        res.send(error)
+    }
 }
 
 

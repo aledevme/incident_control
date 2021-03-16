@@ -14,13 +14,14 @@ userController.login = async () => {
 
 userController.signup = async (req, res) => {
     try {
-        const { name, lastname, email, password } = req.body
+        const { name, lastname, email, password, role } = req.body
         
         const newUser = new User({
             name: name,
             lastname : lastname,
             email:email,
-            password : bcrypt.hashSync(password, 10)
+            password : bcrypt.hashSync(password, 10),
+            role: role
         })
 
         await newUser.save()
