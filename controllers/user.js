@@ -39,11 +39,12 @@ userController.login = async (req, res) => {
 
 userController.signup = async (req, res) => {
     try {
-        
         const { name, lastname, email, password, role } = req.body
         
-        const findUserByEmail = User.findOne({email : email})
+        const findUserByEmail = await User.findOne({email : email})
+        
         if(findUserByEmail){
+            console.log('aqui hey')
             res.send({
                 message : 'Email ya existente en nuestros registros.',
                 user : null
@@ -59,7 +60,7 @@ userController.signup = async (req, res) => {
             })
     
             await newUser.save()
-    
+            
             res.send({
                 message : '',
                 user : newUser
