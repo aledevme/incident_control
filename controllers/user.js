@@ -4,11 +4,35 @@ const userController = {}
 
 const bcrypt = require('bcrypt')
 
-userController.login = async () => {
+userController.login = async (req, res) => {
     try {
-        
+        const { email, password } = req.body
+
+        const userFound = await User.findOne({ email : email })
+
+        if(userFound){
+            
+            if( !bcrypt.compareSync(password, userFound.password) ){
+                res.send({
+                    user : null,
+                    message : 'Las credenciales son incorrectas, verifique'
+                })
+            }else{
+                res.send({
+                    user: userFound
+                })
+            }
+
+        }else{
+            res.send({
+                user:null,
+                message : 'El usuario no se encuentra en nuestros registros'
+            })   
+        }
+
+
     } catch (error) {
-        
+        res.send(error)   
     }
 }
 

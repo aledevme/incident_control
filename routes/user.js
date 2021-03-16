@@ -2,6 +2,7 @@ const router = require('./router')
 const userController = require('../controllers/user')
 
 router
+.post('/login', userController.login)
 .post('/signup', userController.signup)
 .get('/:id/stores', userController.getStores)
 
