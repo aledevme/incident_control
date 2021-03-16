@@ -1,8 +1,15 @@
 const User = require('../models/User.model')
+
 const userController = {}
 
-userController.login = async () => {
+const bcrypt = require('bcrypt')
 
+userController.login = async () => {
+    try {
+        
+    } catch (error) {
+        
+    }
 }
 
 userController.signup = async (req, res) => {
@@ -13,7 +20,7 @@ userController.signup = async (req, res) => {
             name: name,
             lastname : lastname,
             email:email,
-            password : password
+            password : bcrypt.hashSync(password, 10)
         })
 
         await newUser.save()
