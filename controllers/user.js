@@ -42,17 +42,29 @@ userController.signup = async (req, res) => {
         
         const { name, lastname, email, password, role } = req.body
         
-        const newUser = new User({
-            name: name,
-            lastname : lastname,
-            email:email,
-            password : bcrypt.hashSync(password, 10),
-            role: role
-        })
-
-        await newUser.save()
-
-        res.send(newUser)
+        const findUserByEmail = User.findOne({email : email})
+        if(findUserByEmail){
+            res.send({
+                message : 'Email ya existente en nuestros registros.',
+                user : null
+            })
+        }
+        else{
+            const newUser = new User({
+                name: name,
+                lastname : lastname,
+                email:email,
+                password : bcrypt.hashSync(password, 10),
+                role: role
+            })
+    
+            await newUser.save()
+    
+            res.send({
+                message : '',
+                user : newUser
+            })
+        }
     
     } catch (error) {
         res.send(error)
