@@ -7,6 +7,10 @@ const UserSchema = new Schema({
         type:String,
         unique:true,
     },
+    actualStore:{
+        type: Schema.Types.ObjectId,
+        ref:'Store'
+    },
     password: String,
     direction:String, 
     cellphone:String,
