@@ -1,5 +1,9 @@
-var router = require('./router')
+var express = require('express')
+var router = express.Router()
 
-router.get('/', (req, res) => res.send('hey incidents'))
+const incidentController = require('../controllers/incident')
+
+router.post('/', incidentController.saveIncident)
+
 
 module.exports = router

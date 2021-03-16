@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 
 userController.login = async (req, res) => {
     try {
+        
         const { email, password } = req.body
 
         const userFound = await User.findOne({ email : email })
@@ -17,13 +18,13 @@ userController.login = async (req, res) => {
                     user : null,
                     message : 'Las credenciales son incorrectas, verifique'
                 })
-            }else{
+            } else {
                 res.send({
                     user: userFound
                 })
             }
 
-        }else{
+        } else {
             res.send({
                 user:null,
                 message : 'El usuario no se encuentra en nuestros registros'
@@ -38,6 +39,7 @@ userController.login = async (req, res) => {
 
 userController.signup = async (req, res) => {
     try {
+        
         const { name, lastname, email, password, role } = req.body
         
         const newUser = new User({
@@ -59,6 +61,7 @@ userController.signup = async (req, res) => {
 
 userController.getStores = async (req, res) => {
     try {
+        
         const { id } = req.params
         const findUser = await User.find({
             _id : id

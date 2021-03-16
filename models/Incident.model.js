@@ -3,10 +3,15 @@ const Schema = mongoose.Schema
 const IncidentSchema = new Schema({
     name: String,
     observation:String,
-    employe:{
+    employee:{
         required:'Employe id is required',
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Employee'
+        type: Schema.Types.ObjectId,
+        ref:'User'
+    },
+    store:{
+        required:'Tienda requerida',
+        type: Schema.Types.ObjectId,
+        ref:'Store'
     }
 })
 

@@ -27,9 +27,27 @@ storeController.saveStore = async (req, res) => {
     }
 }
 
+storeController.getStore = async (req, res) => {
+    try {
+        const store = await Store.findOne({_id : req.params.id})
+        .populate({
+            path:'incidents',
+            populate:{
+                path:'employee',
+                model:'User',
+                select:'-stores'
+            }
+        })
+
+        res.send(store)
+    } catch (error) {
+        res.send(error)
+    }
+}
+
 storeController.getStores = async (req, res) => {
     try {
-        const stores = await Store.find().populate('userId')
+        const stores = await Store.find().populate('userId incidents incidents.employee')
 
         res.send(stores)
     } catch (error) {

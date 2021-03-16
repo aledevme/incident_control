@@ -8,6 +8,10 @@ const StoreSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref:'User'
     },
+    incidents:[{
+        type:Schema.Types.ObjectId,
+        ref:'Incident'
+    }]
 })
 
 module.exports = mongoose.model("Store", StoreSchema)

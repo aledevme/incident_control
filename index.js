@@ -13,14 +13,17 @@ app.use(bodyparser.urlencoded({
     extended: true
 }))
 
+const connection = require('./db/mongoose');
+
 const store = require('./routes/store')
 const incident = require('./routes/incident');
-const connection = require('./db/mongoose');
 const user = require('./routes/user')
+const auth = require('./routes/auth')
 
 app.use('/stores', store)
 app.use('/incidents', incident)
 app.use('/users', user)
+app.use('/auth', auth)
 
 connection.then(() => {
     
